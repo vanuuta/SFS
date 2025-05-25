@@ -6,80 +6,120 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>689</width>
+    <height>447</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QComboBox" name="roleComboBox">
+  <widget class="QPushButton" name="registerButton">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>80</y>
-     <width>111</width>
-     <height>24</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_5">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>80</y>
-     <width>42</width>
-     <height>24</height>
+     <x>420</x>
+     <y>310</y>
+     <width>131</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>Роль</string>
+    <string>Зарегистрироваться</string>
    </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QLabel" name="ErrorLabel">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>110</y>
-     <width>158</width>
-     <height>56</height>
+     <x>10</x>
+     <y>370</y>
+     <width>671</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QWidget" name="">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>70</y>
+     <width>391</width>
+     <height>228</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
+     <widget class="QLabel" name="label_5">
+      <property name="text">
+       <string>Роль</string>
+      </property>
+     </widget>
+    </item>
+    <item row="2" column="2">
+     <widget class="QLineEdit" name="usernameLineEdit"/>
+    </item>
+    <item row="3" column="0" colspan="2">
+     <widget class="QLabel" name="label_2">
+      <property name="text">
+       <string>Фамилия</string>
+      </property>
+     </widget>
+    </item>
+    <item row="6" column="0" colspan="2">
+     <widget class="QLabel" name="label_4">
+      <property name="text">
+       <string>Подтвердите пароль</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="2">
+     <widget class="QLineEdit" name="usernameLineEdit_4"/>
+    </item>
+    <item row="6" column="2">
+     <widget class="QLineEdit" name="passwordLineEdit_2"/>
+    </item>
+    <item row="2" column="0">
      <widget class="QLabel" name="label">
       <property name="text">
        <string>Имя</string>
       </property>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QLineEdit" name="usernameLineEdit"/>
+    <item row="1" column="0" colspan="2">
+     <widget class="QLabel" name="label_6">
+      <property name="text">
+       <string>Университет</string>
+      </property>
+     </widget>
     </item>
-    <item row="1" column="0">
+    <item row="3" column="2">
+     <widget class="QLineEdit" name="surnameLineEdit"/>
+    </item>
+    <item row="5" column="0" colspan="2">
      <widget class="QLabel" name="label_3">
       <property name="text">
        <string>Пароль</string>
       </property>
      </widget>
     </item>
-    <item row="1" column="1">
+    <item row="5" column="2">
      <widget class="QLineEdit" name="passwordLineEdit"/>
     </item>
+    <item row="4" column="2">
+     <widget class="QLineEdit" name="fathers_surnameLineEdit"/>
+    </item>
+    <item row="0" column="2">
+     <widget class="QComboBox" name="roleComboBox"/>
+    </item>
+    <item row="4" column="0" colspan="2">
+     <widget class="QLabel" name="label_7">
+      <property name="text">
+       <string>Отчество</string>
+      </property>
+     </widget>
+    </item>
    </layout>
-  </widget>
-  <widget class="QLabel" name="errorLabel">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>190</y>
-     <width>121</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
   </widget>
  </widget>
  <resources/>

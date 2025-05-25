@@ -16,7 +16,9 @@ public:
     ~RegisterWindow();
 
 private slots:
-    void on_registerSubmitButton_clicked();
+    void on_registerButton_clicked();
+
+    // void on_reg_pushButton_clicked();
 
 private:
     Ui::RegisterWindow *ui;
