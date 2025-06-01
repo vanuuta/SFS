@@ -3,9 +3,9 @@
 #include <QMessageBox>
 #include <QSqlQuery>
 #include "registerwindow.h"
-// #include "studentwindow.h"
-// #include "teacherwindow.h"
-// #include "adminwindow.h"
+#include "studentwindow.h"
+#include "teacherwindow.h"
+#include "adminwindow.h"
 
 LoginWindow::LoginWindow(QWidget *parent) :
     QDialog(parent),
@@ -39,13 +39,13 @@ void LoginWindow::authenticateUser(const QString &username, const QString &passw
         QString role = query.value(0).toString();
         this->hide();
 
-        // if (role == "student") {
-        //     (new StudentWindow())->show();
-        // } else if (role == "teacher") {
-        //     (new TeacherWindow())->show();
-        // } else if (role == "admin") {
-        //     (new AdminWindow())->show();
-        // }
+        if (role == "student") {
+            (new StudentWindow())->show();
+        } else if (role == "teacher") {
+            (new TeacherWindow())->show();
+        } else if (role == "admin") {
+            (new AdminWindow())->show();
+        }
     } else {
         ui->errorLabel->setText("Неверный логин или пароль.");
     }

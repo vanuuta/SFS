@@ -12,9 +12,12 @@ SOURCES += main.cpp \
     db/result.cpp \
     db/student.cpp \
     ui/addrequestdialog.cpp \
+    ui/adminwindow.cpp \
     ui/loginwindow.cpp \
     ui/mainwindow.cpp \
     ui/registerwindow.cpp \
+    ui/studentwindow.cpp \
+    ui/teacherwindow.cpp
 
 HEADERS += \
     core/applicationmanager.h \
@@ -25,14 +28,20 @@ HEADERS += \
     db/result.h \
     db/student.h \
     ui/addrequestdialog.h \
+    ui/adminwindow.h \
     ui/loginwindow.h \
     ui/mainwindow.h \
     ui/registerwindow.h \
+    ui/studentwindow.h \
+    ui/teacherwindow.h
 
 FORMS += \
     ui/addrequestdialog.ui \
+    ui/adminwindow.ui \
     ui/loginwindow.ui \
     ui/mainwindow.ui \
     ui/registerwindow.ui \
+    ui/studentwindow.ui \
+    ui/teacherwindow.ui
 
 # RESOURCES += resources/icons.qrc

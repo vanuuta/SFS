@@ -3,6 +3,9 @@
 #include <QMessageBox>
 #include <QSqlQuery>
 #include <QSqlError>
+#include "studentwindow.h"
+#include "teacherwindow.h"
+#include "adminwindow.h"
 
 // RegisterWindow::RegisterWindow(QWidget *parent) :
 //     QDialog(parent),
@@ -29,6 +32,7 @@ RegisterWindow::~RegisterWindow()
 
 //TODO  сделать проверку не на совпадение имен, а на совпадению ников (Добавить ники)
 //TODO  Добавипть хеширование
+//TODO  Сделать гуй всех типов пользователей
 void RegisterWindow::on_registerButton_clicked()
 {
     QString university        = ui->usernameLineEdit->text();
@@ -77,6 +81,17 @@ void RegisterWindow::on_registerButton_clicked()
 
     ui->ErrorLabel->setText("Успешная регистрация!");
     accept(); // Закрыть окно регистрации, если успешно
+    if (role == "student"){
+        auto s_w = new StudentWindow;
+        s_w->show();
+    }else if (role == "teacher"){
+        auto t_w = new TeacherWindow;
+        t_w->show();
+
+    }else if (role == "admin"){
+        auto a_w = new AdminWindow;
+        a_w->show();
+    }
     // Здесь добавить логику регистрации
 }
 
