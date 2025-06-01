@@ -27,8 +27,8 @@ RegisterWindow::~RegisterWindow()
 }
 
 
-//TODO: сделать проверку не на совпадение имен, а на совпадению ников (Добавить ники)
-//TODO: Добавипть хеширование
+//TODO  сделать проверку не на совпадение имен, а на совпадению ников (Добавить ники)
+//TODO  Добавипть хеширование
 void RegisterWindow::on_registerButton_clicked()
 {
     QString university        = ui->usernameLineEdit->text();

@@ -27,7 +27,7 @@ void LoginWindow::on_loginButton_clicked()
 
     authenticateUser(username, password);
 }
-
+//TODO  Сделать окна для админа и пользователя
 void LoginWindow::authenticateUser(const QString &username, const QString &password)
 {
     QSqlQuery query;
