@@ -106,6 +106,16 @@ void DBManager::initTables() {
             FOREIGN KEY(request_id) REFERENCES requests(id)
         )
     )");
+    query.exec(R"(
+            CREATE TABLE IF NOT EXISTS waiting_queue (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                request_type TEXT NOT NULL,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+
+    )");
+
 }
 void DBManager::clearAllTables()
 {

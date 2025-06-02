@@ -3,7 +3,10 @@
 #include "ui/mainwindow.h"
 #include "ui/loginwindow.h"
 #include "db/dbmanager.h"
-
+#define  Q_DEBUG
+#ifdef   Q_DEBUG
+    #include "ui/waitingqueuewindow.h"
+#endif
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -13,8 +16,13 @@ int main(int argc, char *argv[])
         return -1;
     }
     DBManager::instance().clearAllTables();
+#ifndef Q_DEBUG
     LoginWindow w;
     w.show();
+#else
+    WaitingQueueWindow w;
+    w.show();
 
+#endif
     return a.exec();
 }

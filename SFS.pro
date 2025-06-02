@@ -8,9 +8,11 @@ SOURCES += main.cpp \
     db/appointment.cpp \
     db/dbmanager.cpp \
     db/queue.cpp \
+    db/queuemanager.cpp \
     db/request.cpp \
     db/result.cpp \
     db/student.cpp \
+    ui/waitingqueuewindow.cpp \
     ui/addrequestdialog.cpp \
     ui/adminwindow.cpp \
     ui/loginwindow.cpp \
@@ -24,9 +26,11 @@ HEADERS += \
     db/appointment.h \
     db/dbmanager.h \
     db/queue.h \
+    db/queuemanager.h \
     db/request.h \
     db/result.h \
     db/student.h \
+    ui/waitingqueuewindow.h \
     ui/addrequestdialog.h \
     ui/adminwindow.h \
     ui/loginwindow.h \
@@ -36,6 +40,7 @@ HEADERS += \
     ui/teacherwindow.h
 
 FORMS += \
+    ui/waitingqueuewindow.ui \
     ui/addrequestdialog.ui \
     ui/adminwindow.ui \
     ui/loginwindow.ui \
