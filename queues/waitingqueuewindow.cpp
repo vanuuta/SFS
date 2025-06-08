@@ -1,4 +1,4 @@
-#include "waitingqueuewindow.h"
+#include "../queues/waitingqueuewindow.h"
 #include "ui_waitingqueuewindow.h"
 #include <QStandardItemModel>
 #include <QMessageBox>

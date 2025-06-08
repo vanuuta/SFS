@@ -5,7 +5,11 @@
 #include "db/dbmanager.h"
 #define  Q_DEBUG
 #ifdef   Q_DEBUG
-    #include "ui/waitingqueuewindow.h"
+    #include "queues/waitingqueuewindow.h"
+    #include "ui/teacherwindow.h"
+    #include "ui/studentwindow.h"
+    #include "ui/adminwindow.h"
+    #include "ui/AddUserDialog.h"
 #endif
 int main(int argc, char *argv[])
 {
@@ -20,7 +24,10 @@ int main(int argc, char *argv[])
     LoginWindow w;
     w.show();
 #else
-    WaitingQueueWindow w;
+    // WaitingQueueWindow w;
+    // w.show();
+    User user ("Ivan", "vanuuta", "123");
+    StudentWindow w(user);
     w.show();
 
 #endif

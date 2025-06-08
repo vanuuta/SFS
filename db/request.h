@@ -30,12 +30,13 @@ public:
     static QList<Request> getByStatus(const QString& status);
     static bool removeById(int id);
 
-
+public:
+    QString m_name;
+    QString m_type;
 private:
     int m_id;
     int m_studentId;
     int m_department_id;
-    QString m_type;
     QString m_status;
     QDateTime m_createdAt;
 };

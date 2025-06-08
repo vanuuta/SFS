@@ -5,6 +5,10 @@ class User
 {
 public:
     User();
+    User(QString _name, QString _username, QString _passwored):
+        name(_name),
+        username(_username),
+        password(_passwored){};
 public:
     QString name;
     QString username;

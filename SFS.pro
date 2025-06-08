@@ -12,8 +12,9 @@ SOURCES += main.cpp \
     db/request.cpp \
     db/result.cpp \
     db/student.cpp \
+    queues/basequeuewindow.cpp \
+    ui/adduserdialog.cpp \
     ui/user.cpp \
-    ui/waitingqueuewindow.cpp \
     ui/addrequestdialog.cpp \
     ui/adminwindow.cpp \
     ui/loginwindow.cpp \
@@ -31,8 +32,9 @@ HEADERS += \
     db/request.h \
     db/result.h \
     db/student.h \
+    queues/basequeuewindow.h \
+    ui/adduserdialog.h \
     ui/user.h \
-    ui/waitingqueuewindow.h \
     ui/addrequestdialog.h \
     ui/adminwindow.h \
     ui/loginwindow.h \
@@ -42,7 +44,8 @@ HEADERS += \
     ui/teacherwindow.h
 
 FORMS += \
-    ui/waitingqueuewindow.ui \
+    queues/basequeuewindow.ui \
+    ui/adduserdialog.ui \
     ui/addrequestdialog.ui \
     ui/adminwindow.ui \
     ui/loginwindow.ui \
@@ -50,5 +53,18 @@ FORMS += \
     ui/registerwindow.ui \
     ui/studentwindow.ui \
     ui/teacherwindow.ui
+
+# Очереди
+HEADERS += queues/basequeue.h    \
+           queues/waitingqueue.h \
+           queues/orderqueue.h   \
+           queues/waitingqueuewindow.h
+SOURCES += queues/basequeue.cpp \
+           queues/waitingqueue.cpp \
+           queues/orderqueue.cpp \
+           queues/waitingqueuewindow.cpp
+
+FORMS   += queues/waitingqueuewindow.ui \
+           queues/orderqueue.ui
 
 # RESOURCES += resources/icons.qrc

@@ -22,6 +22,7 @@ TeacherWindow::TeacherWindow(const User& user, QWidget *parent) :
 void TeacherWindow::setupModel(const User& user)
 {
     ui->lineEditName->setText(user.name);
+    ui->lineEditName->setReadOnly(true);
     requestModel = new QSqlTableModel(this);
     requestModel->setTable("requests");
     requestModel->select();
