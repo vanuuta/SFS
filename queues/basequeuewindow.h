@@ -8,6 +8,7 @@
 #include <QLineEdit>
 #include <QTableView>
 #include <QLabel>
+#include <QHeaderView>   // <--- нужно для настройки ширины столбцов
 #include "basequeue.h"
 
 class BaseQueueWindow : public QWidget
@@ -17,6 +18,9 @@ public:
     explicit BaseQueueWindow(BaseQueue* queue, QWidget* parent = nullptr)
         : QWidget(parent), queue(queue)
     {
+        qDebug() << "BaseQueueWindow::BaseQueueWindow: ";
+        //setMinimumSize(600, 400);
+        //move(100, 100);
         auto* layout = new QVBoxLayout(this);
 
         nameEdit = new QLineEdit();
@@ -26,12 +30,15 @@ public:
         messageEdit->setPlaceholderText("Сообщение (опционально)");
 
         auto* inputLayout = new QHBoxLayout;
+        inputLayout->addWidget(new QLabel("Имя:"));
         inputLayout->addWidget(nameEdit);
+        inputLayout->addWidget(new QLabel("Сообщение:"));
         inputLayout->addWidget(messageEdit);
         layout->addLayout(inputLayout);
 
         addButton = new QPushButton("Добавить");
         removeButton = new QPushButton("Удалить выбранное");
+
         auto* buttonLayout = new QHBoxLayout;
         buttonLayout->addWidget(addButton);
         buttonLayout->addWidget(removeButton);
@@ -39,14 +46,25 @@ public:
 
         tableView = new QTableView();
         tableView->setModel(queue->getModel());
+
+        tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
+        tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+        tableView->horizontalHeader()->setStretchLastSection(true);
+        tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);  // запрет на редактирование ячеек
+
         layout->addWidget(tableView);
 
         connect(addButton, &QPushButton::clicked, this, &BaseQueueWindow::onAddClicked);
         connect(removeButton, &QPushButton::clicked, this, &BaseQueueWindow::onRemoveClicked);
         connect(queue, &BaseQueue::queueUpdated, this, &BaseQueueWindow::refresh);
 
+
+        qDebug() << "before configureModel(): ";
         queue->configureModel();
+        qDebug() << "before refresh: ";
         refresh();
+        qDebug() << "after refresh: ";
+
     }
 
 protected slots:
@@ -55,6 +73,8 @@ protected slots:
         QString msg = messageEdit->text().trimmed();
         if (!queue->addRequest(name, msg))
             return;
+        nameEdit->clear();
+        messageEdit->clear();
         refresh();
     }
 
@@ -69,6 +89,7 @@ protected slots:
 
     void refresh() {
         queue->getModel()->select();
+        tableView->resizeColumnsToContents();  // Обновим ширину колонок
     }
 
 protected:

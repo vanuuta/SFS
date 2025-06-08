@@ -3,7 +3,8 @@
 #include "ui/mainwindow.h"
 #include "ui/loginwindow.h"
 #include "db/dbmanager.h"
-#define  Q_DEBUG
+#include "db/queuemanagerwindow.h"
+// #define  Q_DEBUG
 #ifdef   Q_DEBUG
     #include "queues/waitingqueuewindow.h"
     #include "ui/teacherwindow.h"
@@ -14,12 +15,12 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
+    // DBManager::instance().clearAllTables();
     if (!DBManager::instance().connect("queue_system.db")) {
         QMessageBox::critical(nullptr, "Ошибка БД", "Не удалось подключиться к базе данных.");
         return -1;
     }
-    DBManager::instance().clearAllTables();
+    // DBManager::instance().clearAllTables();
 #ifndef Q_DEBUG
     LoginWindow w;
     w.show();
@@ -27,8 +28,11 @@ int main(int argc, char *argv[])
     // WaitingQueueWindow w;
     // w.show();
     User user ("Ivan", "vanuuta", "123");
-    StudentWindow w(user);
+    AdminWindow w(user);
     w.show();
+
+    auto* manager = new QueueManagerWindow();
+    manager->show();
 
 #endif
     return a.exec();

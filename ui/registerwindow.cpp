@@ -43,6 +43,7 @@ void RegisterWindow::on_registerButton_clicked()
     QString password          = ui->passwordLineEdit->text();
     QString password_2        = ui->passwordLineEdit_2->text();
     QString role              = ui->roleComboBox->currentText();  // студент / преподаватель / админ
+    QString group             = ui->LineEditGroup->text();
     if (role == "Студент")          role = "student";
     if (role == "Администратор")    role = "admin";
     if (role == "Преподаватель")    role = "teacher";
@@ -81,8 +82,9 @@ void RegisterWindow::on_registerButton_clicked()
     }
     User user;
     user.username = username;
-    user.name     = surname + name + fathers_surname;
+    user.name     = surname + " " + name + " " + fathers_surname;
     user.password = password;
+    user.group    = group;
     ui->ErrorLabel->setText("Успешная регистрация!");
     accept(); // Закрыть окно регистрации, если успешно
     if (role == "student"){

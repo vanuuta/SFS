@@ -13,86 +13,43 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QPushButton" name="WaitingQueuePushButton">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>70</y>
-     <width>49</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Имя</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="lineEditName">
-   <property name="geometry">
-    <rect>
-     <x>70</x>
-     <y>70</y>
-     <width>113</width>
+     <x>40</x>
+     <y>500</y>
+     <width>141</width>
      <height>24</height>
     </rect>
    </property>
+   <property name="text">
+    <string>Очередь ожидания</string>
+   </property>
   </widget>
-  <widget class="QPushButton" name="addRequestButton">
+  <widget class="QPushButton" name="SelfOrganizingQueuePushButton">
    <property name="geometry">
     <rect>
-     <x>80</x>
-     <y>600</y>
-     <width>121</width>
-     <height>31</height>
+     <x>270</x>
+     <y>500</y>
+     <width>141</width>
+     <height>24</height>
     </rect>
    </property>
    <property name="text">
-    <string>Добавить запрос</string>
+    <string>Очередь ожидания</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="refreshButton">
+  <widget class="QPushButton" name="OrderQueuePushButton">
    <property name="geometry">
     <rect>
-     <x>550</x>
-     <y>600</y>
-     <width>121</width>
-     <height>31</height>
+     <x>450</x>
+     <y>500</y>
+     <width>141</width>
+     <height>24</height>
     </rect>
    </property>
    <property name="text">
-    <string>Обновить</string>
-   </property>
-  </widget>
-  <widget class="QTableView" name="tableView">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>130</y>
-     <width>681</width>
-     <height>411</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="messageLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>560</y>
-     <width>411</width>
-     <height>31</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>560</y>
-     <width>111</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Сообщение</string>
+    <string>Очередь заказа</string>
    </property>
   </widget>
  </widget>

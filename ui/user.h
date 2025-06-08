@@ -1,6 +1,7 @@
 #ifndef USER_H
 #define USER_H
 #include <QString>
+#include <optional>
 class User
 {
 public:
@@ -11,8 +12,10 @@ public:
         password(_passwored){};
 public:
     QString name;
+    QString role;
     QString username;
     QString password;
+    std::optional<QString> group;
 };
 
 #endif // USER_H

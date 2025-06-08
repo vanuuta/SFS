@@ -1,55 +1,71 @@
-// // waitingqueue.cpp
-// #include "waitingqueue.h"
-// #include <QSqlRecord>
+// WaitingQueue.cpp
+#include "waitingqueue.h"
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QDebug>
+#include <QDateTime>
+WaitingQueue::WaitingQueue(QObject* parent)
+    : BaseQueue(parent)
+{
+    qDebug() << "WaitingQueue::WaitingQueue";
+    model = new QSqlTableModel(this);
+    model->setTable("waiting_queue");
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->select();
+}
 
-// WaitingQueue::WaitingQueue(QWidget* parent) : BaseQueue(parent)
-// {
-//     model = new QSqlTableModel(this);
-//     model->setTable("waiting_queue");
-//     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-//     model->select();
-// }
+bool WaitingQueue::addRequest(const QString& name, const QString& message)
+{
+    QSqlQuery query;
+    query.prepare("INSERT INTO waiting_queue (name, message, created_at) VALUES (?, ?, ?)");
+    query.addBindValue(name);
+    query.addBindValue(message);
+    query.addBindValue(QDateTime::currentDateTime().toString(Qt::ISODate));
 
-// bool WaitingQueue::addRequest(const Request& request)
-// {
-//     QSqlRecord record = model->record();
-//     record.setValue("name", request.m_name);
-//     record.setValue("request_type", request.m_type);
-//     // Можно заполнить остальные поля
+    if (!query.exec()) {
+        qDebug() << "WaitingQueue insert error:" << query.lastError();
+        return false;
+    }
 
-//     if (!model->insertRecord(-1, record)) {
-//         return false;
-//     }
+    emit queueUpdated();
+    return true;
+}
 
-//     if (!model->submitAll()) {
-//         model->revertAll();
-//         return false;
-//     }
+bool WaitingQueue::removeRequest(int requestId)
+{
+    QSqlQuery query;
+    query.prepare("DELETE FROM waiting_queue WHERE id = ?");
+    query.addBindValue(requestId);
 
-//     model->select();
-//     emit queueUpdated();
-//     return true;
-// }
+    if (!query.exec()) {
+        qDebug() << "WaitingQueue delete error:" << query.lastError();
+        return false;
+    }
 
-// bool WaitingQueue::removeRequest(int requestId)
-// {
-//     for (int row = 0; row < model->rowCount(); ++row) {
-//         if (model->record(row).value("id").toInt() == requestId) {
-//             model->removeRow(row);
-//             if (!model->submitAll()) {
-//                 model->revertAll();
-//                 return false;
-//             }
-//             model->select();
-//             emit queueUpdated();
-//             return true;
-//         }
-//     }
-//     return false;
-// }
+    emit queueUpdated();
+    return true;
+}
 
-// void WaitingQueue::updateQueue()
-// {
-//     model->select();
-//     emit queueUpdated();
-// }
+void WaitingQueue::configureModel()
+{
+    QSqlQuery query;
+    query.exec(R"(
+        CREATE TABLE IF NOT EXISTS waiting_queue (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            message TEXT
+        )
+    )");
+
+    model->setTable("waiting_queue");
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+    model->select();
+
+    if (model->lastError().isValid()) {
+        qDebug() << "Model error:" << model->lastError().text();
+    }
+    model->setHeaderData(model->fieldIndex("id"), Qt::Horizontal, "ID");
+    model->setHeaderData(model->fieldIndex("name"), Qt::Horizontal, "Имя");
+    model->setHeaderData(model->fieldIndex("message"), Qt::Horizontal, "Сообщение");
+    model->setHeaderData(model->fieldIndex("created_at"), Qt::Horizontal, "Создано");
+}

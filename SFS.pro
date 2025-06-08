@@ -9,10 +9,16 @@ SOURCES += main.cpp \
     db/dbmanager.cpp \
     db/queue.cpp \
     db/queuemanager.cpp \
+    db/queuemanagerwindow.cpp \
     db/request.cpp \
     db/result.cpp \
     db/student.cpp \
     queues/basequeuewindow.cpp \
+    queues/livequeue.cpp \
+    queues/livequeuewindow.cpp \
+    queues/orderqueuewindow.cpp \
+    queues/selforganizingqueue.cpp \
+    queues/selforganizingqueuewindow.cpp \
     ui/adduserdialog.cpp \
     ui/user.cpp \
     ui/addrequestdialog.cpp \
@@ -29,10 +35,16 @@ HEADERS += \
     db/dbmanager.h \
     db/queue.h \
     db/queuemanager.h \
+    db/queuemanagerwindow.h \
     db/request.h \
     db/result.h \
     db/student.h \
     queues/basequeuewindow.h \
+    queues/livequeue.h \
+    queues/livequeuewindow.h \
+    queues/orderqueuewindow.h \
+    queues/selforganizingqueue.h \
+    queues/selforganizingqueuewindow.h \
     ui/adduserdialog.h \
     ui/user.h \
     ui/addrequestdialog.h \

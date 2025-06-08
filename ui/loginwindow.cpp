@@ -7,6 +7,7 @@
 #include "teacherwindow.h"
 #include "adminwindow.h"
 
+#include <QSqlError>
 LoginWindow::LoginWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::LoginWindow)
@@ -31,23 +32,48 @@ void LoginWindow::on_loginButton_clicked()
 void LoginWindow::authenticateUser(const QString &username, const QString &password)
 {
     QSqlQuery query;
-    query.prepare("SELECT role FROM users WHERE username = :username AND password = :password");
+    // QString group;
+    query.prepare("SELECT role, group_number FROM users WHERE username = :username AND password = :password");
     query.bindValue(":username", username);
     query.bindValue(":password", password);
+    // query.bindValue(":group_number", group);
     User user;
     user.password = password;
     user.username = username;
-    if (query.exec() && query.next()) {
-        QString role = query.value(0).toString();
-        this->hide();
+    // user.group    = group;
+    if (!query.exec()) {
+        qDebug() << "Query error:" << query.lastError().text();
+    } else if (!query.next()) {
+        qDebug() << "No matching user found.";
+    }
 
-        if (role == "student") {
-            (new StudentWindow(user))->show();
-        } else if (role == "teacher") {
-            (new TeacherWindow(user))->show();
-        } else if (role == "admin") {
-            (new AdminWindow(user))->show();
+    if (query.exec() && query.next()) {
+        user.role  = query.value(0).toString();
+        user.group = query.value(1).toString();
+        // this->hide();
+
+        // if (role == "student") {
+        //     (new StudentWindow(user))->show();
+        // } else if (role == "teacher") {
+        //     (new TeacherWindow(user))->show();
+        // } else if (role == "admin") {
+        //     (new AdminWindow(user))->show();
+        // }
+        if (user.role == "student") {
+            qDebug() << "LoginWindow::authenticateUser";
+            auto* studentWin = new StudentWindow(user);
+            studentWin->show();
+            // this->close();
+        } else if (user.role == "teacher") {
+            auto* teacherWin = new TeacherWindow(user);
+            teacherWin->show();
+            this->close();
+        } else if (user.role == "admin") {
+            auto* adminWin = new AdminWindow(user);
+            adminWin->show();
+            this->close();
         }
+
     } else {
         ui->errorLabel->setText("Неверный логин или пароль.");
     }

@@ -37,14 +37,20 @@ QSqlDatabase DBManager::database() const
 
 void DBManager::initTables() {
     QSqlQuery query;
+
+    // query.exec("DROP TABLE IF EXISTS users");
     query.exec(R"(
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT UNIQUE NOT NULL,
             password TEXT NOT NULL,
-            role TEXT CHECK(role IN ('student', 'teacher', 'admin')) NOT NULL
+            role TEXT CHECK(role IN ('student', 'teacher', 'admin')) NOT NULL,
+            group_number TEXT
         )
     )");
+    // query.exec(R"(ALTER TABLE users RENAME COLUMN group TO group_number;
+        // )
+    // )");
     query.exec(R"(
         CREATE TABLE IF NOT EXISTS students (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -110,12 +116,38 @@ void DBManager::initTables() {
             CREATE TABLE IF NOT EXISTS waiting_queue (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
-                request_type TEXT NOT NULL,
-                created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+                message TEXT
             )
 
     )");
+    query.exec(R"(
+            CREATE TABLE IF NOT EXISTS order_queue (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT,
+                message TEXT,
+                scheduled_time TEXT
+            )
 
+    )");
+    query.exec(R"(
+            CREATE TABLE IF NOT EXISTS live_queue (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT,
+                message TEXT,
+                scheduled_time TEXT
+            )
+
+    )");
+    query.exec(R"(
+            CREATE TABLE IF NOT EXISTS self_organizing_queue (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT,
+                message TEXT,
+                priority INTEGER,
+                scheduled_time TEXT
+            )
+
+    )");
 }
 void DBManager::clearAllTables()
 {

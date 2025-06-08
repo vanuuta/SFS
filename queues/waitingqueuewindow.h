@@ -1,31 +1,14 @@
-#include <QDialog>
-#include <QSqlTableModel>
-#include <QStandardItemModel>
-#include "ui_waitingqueuewindow.h"
-#include "db/queuemanager.h"
+// WaitingQueueWindow.h
+#pragma once
 
-namespace Ui {
-class WaitingQueueWindow;
-}
+#include "basequeuewindow.h"
+#include "waitingqueue.h"
 
-class WaitingQueueWindow : public QDialog
+class WaitingQueueWindow : public BaseQueueWindow
 {
     Q_OBJECT
-
 public:
-    explicit WaitingQueueWindow(QWidget *parent = nullptr);
-    ~WaitingQueueWindow();
+    explicit WaitingQueueWindow(WaitingQueue* queue, QWidget* parent = nullptr)
+        : BaseQueueWindow(queue, parent) {}
 
-private slots:
-    void on_addButton_clicked();
-    void on_removeButton_clicked();
-    void on_refreshButton_clicked();
-
-private:
-    Ui::WaitingQueueWindow *ui;
-    QSqlTableModel* model;
-    void setupModel();
-    void showStatusMessage(const QString& message);
 };
-
-
