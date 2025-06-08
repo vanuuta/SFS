@@ -34,17 +34,19 @@ void LoginWindow::authenticateUser(const QString &username, const QString &passw
     query.prepare("SELECT role FROM users WHERE username = :username AND password = :password");
     query.bindValue(":username", username);
     query.bindValue(":password", password);
-
+    User user;
+    user.password = password;
+    user.username = username;
     if (query.exec() && query.next()) {
         QString role = query.value(0).toString();
         this->hide();
 
         if (role == "student") {
-            (new StudentWindow())->show();
+            (new StudentWindow(user))->show();
         } else if (role == "teacher") {
-            (new TeacherWindow())->show();
+            (new TeacherWindow(user))->show();
         } else if (role == "admin") {
-            (new AdminWindow())->show();
+            (new AdminWindow(user))->show();
         }
     } else {
         ui->errorLabel->setText("Неверный логин или пароль.");

@@ -12,6 +12,7 @@ SOURCES += main.cpp \
     db/request.cpp \
     db/result.cpp \
     db/student.cpp \
+    ui/user.cpp \
     ui/waitingqueuewindow.cpp \
     ui/addrequestdialog.cpp \
     ui/adminwindow.cpp \
@@ -30,6 +31,7 @@ HEADERS += \
     db/request.h \
     db/result.h \
     db/student.h \
+    ui/user.h \
     ui/waitingqueuewindow.h \
     ui/addrequestdialog.h \
     ui/adminwindow.h \

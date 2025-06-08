@@ -37,6 +37,7 @@ void RegisterWindow::on_registerButton_clicked()
 {
     QString university        = ui->usernameLineEdit->text();
     QString username          = ui->usernameLineEdit->text();
+    QString name              = ui->nameLineEdit->text();
     QString surname           = ui->surnameLineEdit->text();
     QString fathers_surname   = ui->fathers_surnameLineEdit->text();
     QString password          = ui->passwordLineEdit->text();
@@ -78,18 +79,21 @@ void RegisterWindow::on_registerButton_clicked()
         ui->ErrorLabel->setText("Ошибка регистрации: " + insertQuery.lastError().text());
         return;
     }
-
+    User user;
+    user.username = username;
+    user.name     = surname + name + fathers_surname;
+    user.password = password;
     ui->ErrorLabel->setText("Успешная регистрация!");
     accept(); // Закрыть окно регистрации, если успешно
     if (role == "student"){
-        auto s_w = new StudentWindow;
+        auto s_w = new StudentWindow(user);
         s_w->show();
     }else if (role == "teacher"){
-        auto t_w = new TeacherWindow;
+        auto t_w = new TeacherWindow(user);
         t_w->show();
 
     }else if (role == "admin"){
-        auto a_w = new AdminWindow;
+        auto a_w = new AdminWindow(user);
         a_w->show();
     }
     // Здесь добавить логику регистрации
