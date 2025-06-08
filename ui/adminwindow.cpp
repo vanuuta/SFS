@@ -12,6 +12,7 @@ AdminWindow::AdminWindow(const User& user, QWidget *parent) :
     ui(new Ui::AdminWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Кабинет");
 
     model = new QSqlTableModel(this);
     model->setTable("users");

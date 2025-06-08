@@ -1,5 +1,7 @@
 #include <QApplication>
 #include <QMessageBox>
+#include <QTextStream>
+#include <QFile>
 #include "ui/mainwindow.h"
 #include "ui/loginwindow.h"
 #include "db/dbmanager.h"
@@ -15,7 +17,25 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    // DBManager::instance().clearAllTables();
+
+    QFile light("styles/light.qss");
+    QFile dark("styles/dark.qss");
+    if (light.open(QFile::ReadOnly | QFile::Text)) {
+        QTextStream in(&light);
+        QString style = in.readAll();
+        a.setStyleSheet(style);
+    } else {
+        qDebug() << "Не удалось загрузить light.qss";
+    }
+
+    // if (dark.open(QFile::ReadOnly | QFile::Text)) {
+    //     QTextStream in(&dark);
+    //     QString style = in.readAll();
+    //     a.setStyleSheet(style);
+    // } else {
+    //     qDebug() << "Не удалось загрузить dark.qss";
+    // }
+
     if (!DBManager::instance().connect("queue_system.db")) {
         QMessageBox::critical(nullptr, "Ошибка БД", "Не удалось подключиться к базе данных.");
         return -1;

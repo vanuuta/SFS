@@ -8,7 +8,7 @@ TeacherWindow::TeacherWindow(const User& user, QWidget *parent) :
     ui(new Ui::TeacherWindow)
 {
     ui->setupUi(this);
-
+    this->setWindowTitle("Кабинет Преподавателя");
     setupModel(user);
 
     ui->tableView->setModel(requestModel);

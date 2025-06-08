@@ -2,6 +2,7 @@
 #define USER_H
 #include <QString>
 #include <optional>
+#include "../themetogglebutton.h"
 class User
 {
 public:

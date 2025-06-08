@@ -13,6 +13,7 @@ LoginWindow::LoginWindow(QWidget *parent) :
     ui(new Ui::LoginWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Вход");
     ui->errorLabel->setText("");
 }
 
@@ -63,7 +64,7 @@ void LoginWindow::authenticateUser(const QString &username, const QString &passw
             qDebug() << "LoginWindow::authenticateUser";
             auto* studentWin = new StudentWindow(user);
             studentWin->show();
-            // this->close();
+            this->close();
         } else if (user.role == "teacher") {
             auto* teacherWin = new TeacherWindow(user);
             teacherWin->show();

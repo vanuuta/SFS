@@ -148,6 +148,31 @@ void DBManager::initTables() {
             )
 
     )");
+    query.exec(R"(
+            CREATE TABLE IF NOT EXISTS consultation_queue (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                student_name TEXT NOT NULL,
+                teacher_name TEXT NOT NULL,
+                subject TEXT NOT NULL,
+                date TEXT NOT NULL,
+                time TEXT NOT NULL,
+                status TEXT DEFAULT 'ожидает'  -- например: ожидает, подтверждено, отклонено
+            )
+    )");
+
+    query.exec(R"(
+            CREATE TABLE IF NOT EXISTS teachers (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL
+            )
+    )");
+
+    query.exec(R"(
+            CREATE TABLE IF NOT EXISTS subjects (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL
+            )
+    )");
 }
 void DBManager::clearAllTables()
 {

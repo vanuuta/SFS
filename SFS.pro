@@ -19,7 +19,9 @@ SOURCES += main.cpp \
     queues/orderqueuewindow.cpp \
     queues/selforganizingqueue.cpp \
     queues/selforganizingqueuewindow.cpp \
+    themetogglebutton.cpp \
     ui/adduserdialog.cpp \
+    ui/consultationrequestwindow.cpp \
     ui/user.cpp \
     ui/addrequestdialog.cpp \
     ui/adminwindow.cpp \
@@ -45,7 +47,9 @@ HEADERS += \
     queues/orderqueuewindow.h \
     queues/selforganizingqueue.h \
     queues/selforganizingqueuewindow.h \
+    themetogglebutton.h \
     ui/adduserdialog.h \
+    ui/consultationrequestwindow.h \
     ui/user.h \
     ui/addrequestdialog.h \
     ui/adminwindow.h \
@@ -80,3 +84,6 @@ FORMS   += queues/waitingqueuewindow.ui \
            queues/orderqueue.ui
 
 # RESOURCES += resources/icons.qrc
+
+RESOURCES += \
+    res.qrc

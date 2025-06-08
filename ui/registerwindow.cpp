@@ -20,6 +20,7 @@ RegisterWindow::RegisterWindow(QWidget *parent) :
     ui(new Ui::RegisterWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Регистрация");
     ui->ErrorLabel->setText("");
     ui->roleComboBox->addItems({"Студент", "Преподаватель", "Администратор"});
 }
