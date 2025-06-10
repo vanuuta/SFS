@@ -1,12 +1,19 @@
 #pragma once
-#include "basequeue.h"
 
-class SelfOrganizingQueue : public BaseQueue {
+#include <QObject>
+#include <QStringList>
+
+class SelfOrganizingQueue : public QObject
+{
     Q_OBJECT
 public:
     explicit SelfOrganizingQueue(QObject* parent = nullptr);
 
-    bool addRequest(const QString& name, const QString& message) override;
-    bool removeRequest(int requestId) override;
-    void configureModel() override;
+    void addStudent(const QString& name);
+    void removeStudent(const QString& name);
+    QStringList getQueue() const;
+    bool isInQueue(const QString& name) const;
+
+private:
+    QStringList queue;
 };

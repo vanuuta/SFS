@@ -173,6 +173,35 @@ void DBManager::initTables() {
                 name TEXT NOT NULL
             )
     )");
+    query.exec(R"("DELETE FROM subjects"")");
+    query.exec(R"(
+            INSERT INTO subjects (name) VALUES
+            ('Физика'), ('Математический анализ'),
+            ('Информатика'), ('Цифровая обработка сигналов'), ('Моделирование'),
+('Социология'), ('Философия'), ('Программирование на языках высокого уровня'),
+('ЭВМ'), ('БЖД')
+;
+
+    )");
+    query.exec(R"(
+            CREATE TABLE lab_queue (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                student_name TEXT NOT NULL,
+                subject_name TEXT NOT NULL,
+                timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+                )
+    )");
+    query.exec(R"(
+
+    CREATE TABLE certificate_requests (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        student_name TEXT NOT NULL,
+        certificate_type TEXT NOT NULL,
+        purpose TEXT,
+        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+        )
+    )");
+
 }
 void DBManager::clearAllTables()
 {

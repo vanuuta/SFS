@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>727</width>
+    <width>850</width>
     <height>648</height>
    </rect>
   </property>
@@ -51,6 +51,17 @@
    <property name="text">
     <string>Заказ справки</string>
    </property>
+  </widget>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>140</y>
+     <width>771</width>
+     <height>301</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="contentLayout"/>
   </widget>
  </widget>
  <resources/>

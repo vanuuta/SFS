@@ -9,10 +9,12 @@ StudentWindow::StudentWindow(const User& user, QWidget* parent)
     this->setWindowTitle("Кабинет студента");
     // setMinimumSize(600, 400);
     auto* mainLayout = new QVBoxLayout(this);
+
     this->setLayout(mainLayout); // Установим layout окну
     setMinimumSize(800, 600);    // Минимальный размер окна
 
-    auto* topBarLayout = new QHBoxLayout;
+    auto* topBarLayout = new QVBoxLayout;
+    contentWidget = new QWidget(this);
 
 
     themeToggleButton = new ThemeToggleButton();
@@ -22,8 +24,12 @@ StudentWindow::StudentWindow(const User& user, QWidget* parent)
     themeToggleButton->setFlat(true);
     topBarLayout->addStretch(); // Чтобы кнопка ушла вправо
     topBarLayout->addWidget(themeToggleButton);
-    // themeToggleButton->setStyleSheet("background: red;");
 
+    mainLayout->addWidget(ui->OrderQueuePushButton);
+    mainLayout->addWidget(ui->SelfOrganizingQueuePushButton);
+    mainLayout->addWidget(ui->WaitingQueuePushButton);
+
+    mainLayout->addWidget(contentWidget);
     mainLayout->addLayout(topBarLayout);
 
     // welcomeLabel = new QLabel("Добро пожаловать, " + user.username);
@@ -53,51 +59,42 @@ void StudentWindow::toggleTheme()
         qApp->setStyleSheet("");
         themeToggleButton->setIcon(QIcon("sun.png"));
     }
-
-    // QFile styleFile(isDark ? "dark.qss" : ":light.qss");
-    // if (styleFile.open(QFile::ReadOnly)) {
-    //     QString style = styleFile.readAll();
-    //     qApp->setStyleSheet(style);
-    //     styleFile.close();
-    // }
-
-
-    // qDebug() << ;
-    // QString pwd = isDark ? "moon.png" : "sun.png";
-    // QIcon icon(pwd);
-    // if (icon.isNull()) {
-    //     qDebug() << "Icon load failed!";
-    // } else {
-    //     qDebug() << "Icon loaded successfully!";
-    // }
-
-    // themeToggleButton->setIcon(icon);
 }
 
 
 
 void StudentWindow::on_WaitingQueuePushButton_clicked() {
+    clearContentWidget();
     openWaitingQueue();
-    // WaitingQueue* wq = new WaitingQueue(this);
-    // auto wqw = new WaitingQueueWindow(wq, this);
-    // wqw->show();
 }
 
 void StudentWindow::on_SelfOrganizingQueuePushButton_clicked() {
-    QPoint point = this->pos();
-    SelfOrganizingQueue* soq = new SelfOrganizingQueue(this);
-    auto soqw = new SelfOrganizingQueueWindow(soq, this);
-    soqw->setGeometry(point.x() + 100, point.y() + 400, 200, 200);
-    soqw->show();
-}
-void StudentWindow::on_OrderQueuePushButton_clicked() {
-    OrderQueue* oq = new OrderQueue(this);
-    auto oqw = new OrderQueueWindow(oq, this);
-    oqw->show();
+    clearContentWidget();
+    openSelfOrganizingQueue();
 }
 
+void StudentWindow::on_OrderQueuePushButton_clicked() {
+    clearContentWidget();
+    openOrderQueue();
+}
+void StudentWindow::openSelfOrganizingQueue(){
+    auto* widget = new SelfOrganizingQueueWidget(user.username, this);
+    ui->contentLayout->addWidget(widget);
+}
+void StudentWindow::openOrderQueue(){
+    auto* widget = new OrderCertificateWidget(user, this);
+    ui->contentLayout->addWidget(widget);
+}
 void StudentWindow::openWaitingQueue()
 {
     auto* window = new ConsultationRequestWindow(user.username, this);
-    window->show();
+    ui->contentLayout->addWidget(window);
+}
+void StudentWindow::clearContentWidget()
+{
+    QLayoutItem* child;
+    while ((child = ui->contentLayout->takeAt(0)) != nullptr) {
+        delete child->widget();
+        delete child;
+    }
 }

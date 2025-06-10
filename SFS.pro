@@ -22,6 +22,8 @@ SOURCES += main.cpp \
     themetogglebutton.cpp \
     ui/adduserdialog.cpp \
     ui/consultationrequestwindow.cpp \
+    ui/ordercertificatewidget.cpp \
+    ui/selforganizingqueuewidget.cpp \
     ui/user.cpp \
     ui/addrequestdialog.cpp \
     ui/adminwindow.cpp \
@@ -50,6 +52,8 @@ HEADERS += \
     themetogglebutton.h \
     ui/adduserdialog.h \
     ui/consultationrequestwindow.h \
+    ui/ordercertificatewidget.h \
+    ui/selforganizingqueuewidget.h \
     ui/user.h \
     ui/addrequestdialog.h \
     ui/adminwindow.h \

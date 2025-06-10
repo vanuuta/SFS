@@ -12,10 +12,10 @@
 #include "ui_studentwindow.h"
 #include "ConsultationRequestWindow.h"
 #include "../queues/waitingqueuewindow.h"
-#include "../queues/orderqueuewindow.h"
+#include "OrderCertificateWidget.h"
 #include "../queues/livequeuewindow.h"
-#include "../queues/selforganizingqueuewindow.h"
-
+#include "selforganizingqueuewidget.h"
+#include <QStackedWidget>
 class StudentWindow : public QWidget
 {
     Q_OBJECT
@@ -25,11 +25,13 @@ public:
 
     void setup(const User& user);
     void toggleTheme();
-
+    void clearContentWidget();
 public:
     bool isDark;
 private slots:
     void openWaitingQueue();
+    void openSelfOrganizingQueue();
+    void openOrderQueue();
     void on_WaitingQueuePushButton_clicked();
     void on_SelfOrganizingQueuePushButton_clicked();
     void on_OrderQueuePushButton_clicked();
@@ -39,6 +41,7 @@ private:
     Ui::StudentWindow *ui;
     User user;
     WaitingQueueWindow*          waitingQueueWindow          = nullptr;
+    QWidget*              contentWidget;
     // LiveQueueWindow*             liveQueueWindow             = nullptr;
     // OrderQueueWindow*            orderQueueWindow            = nullptr;
     // SelfOrganizingQueueWindow*   SelforganizingQueueWindow   = nullptr;
